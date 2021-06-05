@@ -1,0 +1,62 @@
+<h1>
+    Add a New Biller
+</h1>
+<br>
+<br>
+
+<div>
+
+
+    <table cellpadding="20px" class="center">
+
+
+        <tr>
+            <td><label for="exampleInputEmail1"><b>Biller Name</b></label></td>
+            <td><input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                    placeholder="Enter Name"></td>
+        </tr>
+
+        <tr>
+            <td><label for="exampleInputPassword1"><b>Address</b></label></td>
+            <td>
+                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Enter Address">
+            </td>
+        </tr>
+
+        <tr>
+            <td><label for="exampleInputPassword1"><b>City</b></label></td>
+            <td>
+                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Enter City">
+            </td>
+        </tr>
+
+        <tr>
+            <td><label for="exampleInputPassword1"><b>PIN Code</b></label></td>
+            <td>
+                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Enter PIN Code">
+            </td>
+        </tr>
+
+        <tr>
+            <td><label for=""><b>Categorey</b></label></td>
+            <td>
+                <select class="custom-select" name="dept" ngModel>
+                    <option *ngFor="let cat of categorey">{{cat}}</option>
+                </select>
+            </td>
+        </tr>
+    </table>
+
+
+
+
+    <br>
+    <div class="center1">
+        <a routerLink="/manage">
+            <button class="btn btn-primary" style="margin-right: 35px;">Submit</button>
+        </a>
+
+        <a routerLink="/activation">
+            <button class="btn btn-primary" style="margin-right: 35px;">Go Back</button>
+        </a>
+    </div>

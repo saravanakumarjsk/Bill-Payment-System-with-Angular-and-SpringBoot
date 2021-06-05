@@ -4,12 +4,12 @@ h1{
     text-align: center;
 }
 
-
-.center, tr ,td, th{
+.center{
     margin-left: auto; 
     margin-right: auto;
-    border: 1px solid black;
-    text-align: center;
+    /* border: 1px solid black; */
+    text-align: left;
+    border-collapse: collapse;
     text-shadow: 2px 2px 5px rgb(110, 120, 110);
     
 }
@@ -18,5 +18,7 @@ h1{
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-right: 16px;
+    margin-right: 2px;
   }
+
+  

@@ -10,6 +10,8 @@ import { FormsModule } from '@angular/forms';
 import { RegisterComponent } from './register/register.component';
 import { ActivationComponent } from './activation/activation.component';
 import { ManageComponent } from './manage/manage.component';
+import { AddBillerComponent } from './add-biller/add-biller.component';
+import { ModifyBillerComponent } from './modify-biller/modify-biller.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,9 @@ import { ManageComponent } from './manage/manage.component';
     FooterComponent,
     RegisterComponent,
     ActivationComponent,
-    ManageComponent
+    ManageComponent,
+    AddBillerComponent,
+    ModifyBillerComponent
   ],
   imports: [
     BrowserModule,
