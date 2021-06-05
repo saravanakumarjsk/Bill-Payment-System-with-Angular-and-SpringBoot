@@ -1,0 +1,61 @@
+<div class="logout">
+        <button type="button" class="btn btn-primary">Log Out</button>
+</div>
+
+<div class="container-fuild">
+    <h1>Bill Payment Registration</h1>
+    <form #registrationForm="ngForm">
+        <table cellpadding="18px" class="tb1">
+            <tr>
+                <td><label for=""><b>Customer Name</b></label></td>
+                <td><label for=""><b style="color: rgb(174, 68, 226);">Saravana kumar</b></label></td>
+            </tr>
+            <tr>
+                <td><label for=""><b>Preffered Account 1</b></label></td>
+                <td>
+                    <select class="custom-select" name="dept" ngModel>
+                        <option *ngFor="let acc of account">{{acc}}</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td><label for=""><b>Preffered Account 2</b></label></td>
+                <td>
+                    <select class="custom-select" name="dept" ngModel>
+                        <option *ngFor="let acc of account">{{acc}}</option>
+                    </select>
+                </td>
+            </tr>
+
+        </table>
+        <div class="terms">
+            <p>
+                <br>
+                <b><u>Terms and Conditions</u></b>
+                <br>
+                <b>
+
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox"
+                        name="check" id="GFG" value="1" unchecked> I hereby declare that I have read the terms and
+                    conditions completely as mentioned in
+                    the Bill Payment Agreement and I unconditionally agree to abide by these terms and conditions.
+                </b>
+            </p>
+        </div>
+        <table class="b1" cellpadding="32px" cellspacing="30px">
+            <tr>
+                <td></td>
+                <td> </td>
+                <td> </td>
+                <td>
+                    <button class="btn btn-success">I Agree</button>
+                </td>
+                <td>
+                    <button type="button" class="btn btn-danger">Cancel</button>
+                </td>
+            </tr>
+        </table>
+
+    </form>
+
+</div>

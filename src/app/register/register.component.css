@@ -1,0 +1,35 @@
+.container-fuild {
+    margin: auto;
+    width: 40%;
+    height: 50%;
+    padding: 20px;
+    margin-top: 10%;
+    box-shadow:0px 0px 20px #000;
+    color:rgb(141, 123, 17)
+  }
+  .logout{
+    position: absolute;
+    top:120px;
+    right: 30px;
+}
+
+.tb1{
+    font-size: 21px;
+}
+
+
+  h1 {
+      text-align: center;
+      color: rgb(141, 123, 17);
+  }
+
+.terms{
+    color:rgb(89, 83, 83)
+}
+
+  .center {
+    margin-left: auto;
+    margin-right: auto;
+    font-size: larger;
+    font-weight: 500;
+  }

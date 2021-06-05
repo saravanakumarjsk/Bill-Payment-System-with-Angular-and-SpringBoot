@@ -1,0 +1,31 @@
+<br>
+<br>
+<div class="container-fuild" >
+    
+    <h1>User Login</h1>
+    <form #loginForm="ngForm" >
+        
+        <table cellpadding="18px" class="center">
+            <tr>
+                <td><label for=""><b>User Name</b></label></td>
+                <td>
+                    <input type="text" class="form-control" name="userName" ngModel>
+                </td>
+            </tr>
+            <tr>
+                <td><label for=""><b>Password</b></label></td>
+                <td>
+                    <input type="password" class="form-control" name="password" ngModel>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <!-- <button type="button" class="btn btn-primary">Login</button> -->
+                    <a routerLink="/register"><button class="btn btn-success" > Login </button></a>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+
