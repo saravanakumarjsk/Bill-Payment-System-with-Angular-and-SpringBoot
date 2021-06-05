@@ -1,0 +1,17 @@
+.activation{
+    margin: auto;
+    font-size: larger;
+    margin-top: 2;
+    width: 80%;
+    text-align: center;
+    padding: 10px;
+}
+
+/* .menu{
+   text-align: center;
+} */
+button{
+    box-shadow:0px 0px 7px #000;
+}
+
+
