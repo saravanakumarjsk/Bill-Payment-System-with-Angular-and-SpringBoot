@@ -4,10 +4,17 @@ h1{
     text-align: center;
 }
 
+.logout{
+    position: absolute;
+    top:120px;
+    right: 30px;
+}
+
 .center{
     margin-left: auto; 
     margin-right: auto;
     /* border: 1px solid black; */
+    font-size: 20px;
     text-align: left;
     border-collapse: collapse;
     text-shadow: 2px 2px 5px rgb(110, 120, 110);

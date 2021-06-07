@@ -1,0 +1,73 @@
+<div class="logout">
+    <a routerLink="/login">
+        <button type="button" class="btn btn-danger">Log Out</button>
+    </a>
+</div>
+
+<h1>
+    Make Payment
+</h1>
+<br>
+<br>
+
+<div>
+
+
+    <table cellpadding="18px" class="center">
+
+
+        <tr>
+            <td><label for=""><b>Acc No</b></label></td>
+            <td>
+                <select class="form-select" aria-label="Default select example" name="account" ngModel>
+                    <option *ngFor="let acc of account">{{acc}}</option>
+                </select>
+            </td>
+        </tr>
+
+        <tr>
+            <td><label for=""><b>Biller</b></label></td>
+            <td>
+                <select class="form-select" aria-label="Default select example" name="biller" ngModel>
+                    <option *ngFor="let bill of biller">{{bill}}</option>
+                </select>
+            </td>
+        </tr>
+
+        <tr>
+            <td><label for="exampleInputPassword1"><b>Bill Amount</b></label></td>
+            <td>
+                <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Enter Amount">
+            </td>
+        </tr>
+
+
+        <tr>
+            <td><label for=""><b>Pay Now?</b></label></td>
+            <td>
+                <input type="radio" id="male" name="gender" value="Yes">&nbsp;
+                <label for="male">Yes</label> &nbsp;
+                <input type="radio" id="female" name="gender" value="No">&nbsp;
+                <label for="female">No</label><br>
+            </td>
+        </tr>
+
+        <tr>
+            <td><label for="e"><b>Payment Due Date</b></label></td>
+            <td>
+                <input placeholder="Select date" type="date" id="example" class="form-control">
+            </td>
+        </tr>
+    </table>
+
+
+    <br>
+    <div class="center1">
+        <a routerLink="/manage">
+            <button class="btn btn-primary" style="margin-right: 35px;">Submit</button>
+        </a>
+
+        <a routerLink="/manage">
+            <button class="btn btn-primary" style="margin-right: 35px;">Cancel</button>
+        </a>
+    </div>

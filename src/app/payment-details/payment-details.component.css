@@ -1,3 +1,4 @@
+
 h1{
     padding-top: 50px;
     text-shadow: 2px 2px 5px rgb(110, 120, 110);
@@ -19,9 +20,10 @@ h1{
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-right: 2px;
-  }
-  .logout{
+    margin-left: 52px;
+}
+
+.logout{
     position: absolute;
     top:120px;
     right: 30px;

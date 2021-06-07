@@ -1,5 +1,7 @@
 <div class="logout">
-        <button type="button" class="btn btn-primary">Log Out</button>
+    <a routerLink="/login">
+        <button type="button" class="btn btn-danger">Log Out</button>
+    </a>
 </div>
 
 <div class="container-fuild">
@@ -13,7 +15,7 @@
             <tr>
                 <td><label for=""><b>Preffered Account 1</b></label></td>
                 <td>
-                    <select class="custom-select" name="dept" ngModel>
+                    <select class="form-select" aria-label="Default select example" name="account" ngModel>
                         <option *ngFor="let acc of account">{{acc}}</option>
                     </select>
                 </td>
@@ -21,7 +23,7 @@
             <tr>
                 <td><label for=""><b>Preffered Account 2</b></label></td>
                 <td>
-                    <select class="custom-select" name="dept" ngModel>
+                    <select class="form-select" aria-label="Default select example" name="account" ngModel>
                         <option *ngFor="let acc of account">{{acc}}</option>
                     </select>
                 </td>
@@ -53,7 +55,7 @@
                     </a>
                 </td>
                 <td>
-                    <a routerLink="/activation">
+                    <a routerLink="/login">
                         <button type="button" class="btn btn-danger">Cancel</button>
                     </a>
                     

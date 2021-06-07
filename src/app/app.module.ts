@@ -12,6 +12,9 @@ import { ActivationComponent } from './activation/activation.component';
 import { ManageComponent } from './manage/manage.component';
 import { AddBillerComponent } from './add-biller/add-biller.component';
 import { ModifyBillerComponent } from './modify-biller/modify-biller.component';
+import { MakePaymentComponent } from './make-payment/make-payment.component';
+import { ViewPaymentComponent } from './view-payment/view-payment.component';
+import { PaymentDetailsComponent } from './payment-details/payment-details.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +26,10 @@ import { ModifyBillerComponent } from './modify-biller/modify-biller.component';
     ActivationComponent,
     ManageComponent,
     AddBillerComponent,
-    ModifyBillerComponent
+    ModifyBillerComponent,
+    MakePaymentComponent,
+    ViewPaymentComponent,
+    PaymentDetailsComponent,
   ],
   imports: [
     BrowserModule,

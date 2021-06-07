@@ -1,3 +1,9 @@
+<div class="logout">
+    <a routerLink="/login">
+        <button type="button" class="btn btn-danger">Log Out</button>
+    </a>
+</div>
+
 <h1>
     Add a New Biller
 </h1>
@@ -12,35 +18,35 @@
 
         <tr>
             <td><label for="exampleInputEmail1"><b>Biller Name</b></label></td>
-            <td><input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+            <td><input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
                     placeholder="Enter Name"></td>
         </tr>
 
         <tr>
             <td><label for="exampleInputPassword1"><b>Address</b></label></td>
             <td>
-                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Enter Address">
+                <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Enter Address">
             </td>
         </tr>
 
         <tr>
             <td><label for="exampleInputPassword1"><b>City</b></label></td>
             <td>
-                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Enter City">
+                <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Enter City">
             </td>
         </tr>
 
         <tr>
             <td><label for="exampleInputPassword1"><b>PIN Code</b></label></td>
             <td>
-                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Enter PIN Code">
+                <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Enter PIN Code">
             </td>
         </tr>
 
         <tr>
             <td><label for=""><b>Categorey</b></label></td>
             <td>
-                <select class="custom-select" name="dept" ngModel>
+                <select class="form-select" aria-label="Default select example" name="account" ngModel>
                     <option *ngFor="let cat of categorey">{{cat}}</option>
                 </select>
             </td>
@@ -57,6 +63,6 @@
         </a>
 
         <a routerLink="/activation">
-            <button class="btn btn-primary" style="margin-right: 35px;">Go Back</button>
+            <button class="btn btn-primary" style="margin-right: 35px;">Back</button>
         </a>
     </div>

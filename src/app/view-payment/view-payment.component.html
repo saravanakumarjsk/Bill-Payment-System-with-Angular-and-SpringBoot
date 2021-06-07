@@ -1,0 +1,89 @@
+<div class="logout">
+    <a routerLink="/login">
+        <button type="button" class="btn btn-danger">Log Out</button>
+    </a>
+</div>
+
+<h1>
+    View Payment History
+</h1>
+<br>
+<br>
+
+<div>
+
+
+    <table cellpadding="18px" class="center">
+        <tr>
+            <td><label for=""><b>Catogorey</b></label></td>
+            <td>
+                <select class="form-select" aria-label="Default select example" name="account" ngModel>
+                    <option *ngFor="let cat of categorey">{{cat}}</option>
+                </select>
+            </td>
+        </tr>
+
+        <tr>
+            <td><label for=""><b>Biller</b></label></td>
+            <td>
+                <select class="form-select" aria-label="Default select example" name="biller" ngModel>
+                    <option *ngFor="let stat of status">{{stat}}</option>
+                </select>
+            </td>
+        </tr>
+
+
+        <tr>
+            <td><label for="e"><b>From</b></label></td>
+            <td>
+                <input placeholder="Select date" type="date" id="example" class="form-control">
+            </td>
+            <td><label for="e"><b>To</b></label></td>
+            <td>
+                <input placeholder="Select date" type="date" id="example" class="form-control">
+            </td>
+        </tr>
+    </table>
+
+    <br>
+    <div class="center1">
+        <a routerLink="/history">
+            <button class="btn btn-primary" style="margin-right: 35px;">Search</button>
+        </a>
+
+        <a routerLink="/manage">
+            <button class="btn btn-primary" style="margin-right: 35px;">Cancel</button>
+        </a>
+    </div>
+
+    <br>
+    <br>
+
+    <table cellpadding="18px" id="center2">
+
+        <tr>
+            <th>Date</th>
+            <th>Account</th>
+            <th>Biller ID</th>
+            <th>Amount</th>
+            <th>Categorey</th>
+            <th>Status</th>
+        </tr>
+
+        <tbody *ngFor="let s of data;">
+            {{s.data}}
+            <tr>
+                <td>{{s.date}}</td>
+                <td>{{s.acc}}</td>
+                <td><a routerLink="/details">
+                    {{s.biller}}
+                </a></td>
+                <td>{{s.amount}}</td>
+                <td>{{s.categorey}}</td>
+                <td>{{s.status}}</td>
+            </tr>
+        </tbody>
+
+
+
+    </table>

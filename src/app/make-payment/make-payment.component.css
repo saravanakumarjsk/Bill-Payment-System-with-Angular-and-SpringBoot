@@ -21,9 +21,10 @@ h1{
     align-items: center;
     margin-right: 2px;
   }
+
   .logout{
     position: absolute;
     top:120px;
     right: 30px;
 }
-  
+   

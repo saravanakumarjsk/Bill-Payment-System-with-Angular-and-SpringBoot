@@ -3,7 +3,11 @@ h1{
     text-shadow: 2px 2px 5px rgb(110, 120, 110);
     text-align: center;
 }
-
+.logout{
+    position: absolute;
+    top:120px;
+    right: 30px;
+}
 
 .center, tr ,td, th{
     margin-left: auto; 
