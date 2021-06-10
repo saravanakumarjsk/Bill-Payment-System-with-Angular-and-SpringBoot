@@ -12,8 +12,14 @@ export class AddBillerComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  public categorey:any = ["Insurence", "Food", "Water", "Electricity"];
+  public categorey: any = ["Insurence", "Food", "Water", "Electricity"];
 
-
+  public addBiller = {
+    "name": "",
+    "address": "",
+    "city": "",
+    "pin": "",
+    "cat": ""
+  }
 
 }

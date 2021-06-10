@@ -15,6 +15,7 @@ export class ViewPaymentComponent implements OnInit {
 
   public categorey: any = ["Insurence", "Food", "Water", "Electricity"];
   public status: any = ["Active", "Inactive"];
+  public biller:any = ["Saravana", "Sarath", "William", "Sathish"]
 
   public data: any;
 
@@ -26,6 +27,14 @@ export class ViewPaymentComponent implements OnInit {
       { "date": "12 / 2 / 2077", "acc": "89398478589", "biller": "james", "amount": 75000, "categorey": "active", "status": "yes" },
       { "date": "12 / 2 / 2077", "acc": "89398478589", "biller": "james", "amount": 75000, "categorey": "active", "status": "yes" }
     ]
+  }
+
+
+  public viewPayment = {
+    "cat":"",
+    "biller":"",
+    "from":"",
+    "to":""
   }
 
 }

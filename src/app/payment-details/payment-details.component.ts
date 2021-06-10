@@ -12,4 +12,10 @@ export class PaymentDetailsComponent implements OnInit {
   ngOnInit(): void {
   }
 
+
+  public details = {
+    "bill":"",
+    "date":""
+  }
+
 }

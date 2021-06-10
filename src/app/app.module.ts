@@ -15,6 +15,8 @@ import { ModifyBillerComponent } from './modify-biller/modify-biller.component';
 import { MakePaymentComponent } from './make-payment/make-payment.component';
 import { ViewPaymentComponent } from './view-payment/view-payment.component';
 import { PaymentDetailsComponent } from './payment-details/payment-details.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 @NgModule({
   declarations: [
@@ -34,7 +36,8 @@ import { PaymentDetailsComponent } from './payment-details/payment-details.compo
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    BrowserAnimationsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

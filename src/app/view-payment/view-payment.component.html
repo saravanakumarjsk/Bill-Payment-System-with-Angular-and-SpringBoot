@@ -10,80 +10,110 @@
 <br>
 <br>
 
-<div>
+<form #viewHistoryForm="ngForm">
 
 
-    <table cellpadding="18px" class="center">
-        <tr>
-            <td><label for=""><b>Catogorey</b></label></td>
-            <td>
-                <select class="form-select" aria-label="Default select example" name="account" ngModel>
-                    <option *ngFor="let cat of categorey">{{cat}}</option>
-                </select>
-            </td>
-        </tr>
 
-        <tr>
-            <td><label for=""><b>Biller</b></label></td>
-            <td>
-                <select class="form-select" aria-label="Default select example" name="biller" ngModel>
-                    <option *ngFor="let stat of status">{{stat}}</option>
-                </select>
-            </td>
-        </tr>
-
-
-        <tr>
-            <td><label for="e"><b>From</b></label></td>
-            <td>
-                <input placeholder="Select date" type="date" id="example" class="form-control">
-            </td>
-            <td><label for="e"><b>To</b></label></td>
-            <td>
-                <input placeholder="Select date" type="date" id="example" class="form-control">
-            </td>
-        </tr>
-    </table>
-
-    <br>
-    <div class="center1">
-        <a routerLink="/history">
-            <button class="btn btn-primary" style="margin-right: 35px;">Search</button>
-        </a>
-
-        <a routerLink="/manage">
-            <button class="btn btn-primary" style="margin-right: 35px;">Cancel</button>
-        </a>
-    </div>
-
-    <br>
-    <br>
-
-    <table cellpadding="18px" id="center2">
-
-        <tr>
-            <th>Date</th>
-            <th>Account</th>
-            <th>Biller ID</th>
-            <th>Amount</th>
-            <th>Categorey</th>
-            <th>Status</th>
-        </tr>
-
-        <tbody *ngFor="let s of data;">
-            {{s.data}}
+    <div>
+        <table cellpadding="18px" class="center">
             <tr>
-                <td>{{s.date}}</td>
-                <td>{{s.acc}}</td>
-                <td><a routerLink="/details">
-                    {{s.biller}}
-                </a></td>
-                <td>{{s.amount}}</td>
-                <td>{{s.categorey}}</td>
-                <td>{{s.status}}</td>
+                <td><label for=""><b>Catogorey</b></label></td>
+                <td>
+                    <select class="form-select" #cat="ngModel" required name="cat" required
+                        [(ngModel)]="viewPayment.cat" [class.is-invalid]="cat.invalid && cat.touched"
+                        [(ngModel)]="viewPayment.cat">
+                        <option value="" selected>select the categorey</option>
+                        <option *ngFor="let cat of categorey">{{cat}}</option>
+                    </select>
+                    <div *ngIf="cat.errors && (cat.valid || cat.touched)">
+                        <small class="text-danger" *ngIf="cat.errors.required">Please select the categorey</small>
+                    </div>
+                </td>
             </tr>
-        </tbody>
+
+            <tr>
+                <td><label for=""><b>Biller</b></label></td>
+                <td>
+                    <select class="form-select" class="form-select" #blr="ngModel" required name="blr"
+                        [class.is-invalid]="blr.invalid && blr.touched" [(ngModel)]="viewPayment.biller">
+                        <option value="" selected>select the biller</option>
+                        <option *ngFor="let bill of biller">{{bill}}</option>
+                    </select>
+                    <div *ngIf="blr.errors && (blr.valid || blr.touched)">
+                        <small class="text-danger" *ngIf="blr.errors.required">Please select the Biller</small>
+                    </div>
+                </td>
+            </tr>
 
 
+            <tr>
+                <td><label for="e"><b>From</b></label></td>
+                <td>
 
-    </table>
+                    <input type="date" class="form-control" #date="ngModel" required name="date"
+                        [class.is-invalid]="date.invalid && date.touched" [(ngModel)]="viewPayment.from">
+                    <small class="text-danger" [class.d-none]="date.valid || date.untouched">
+                        Please enter the From date
+                    </small>
+                </td>
+                <td><label for="e"><b>To</b></label></td>
+                <td>
+                    <input type="date" class="form-control" #to="ngModel" required name="to"
+                        [class.is-invalid]="to.invalid && to.touched" [(ngModel)]="viewPayment.to">
+                    <div *ngIf="date.value > to.value; else elseblock">
+                        <small class="text-danger">
+                            to date cannot be smaller than from date
+                        </small>
+                    </div>
+                    <ng-template #elseblock>
+                        <small class="text-danger" [class.d-none]="to.valid || to.untouched">
+                            Please enter the To date
+                        </small>
+                    </ng-template>
+                </td>
+            </tr>
+        </table>
+
+        <br>
+        <div class="center1">
+            <a routerLink="/history">
+                <button class="btn btn-primary" style="margin-right: 35px;">Search</button>
+            </a>
+
+            <a routerLink="/manage">
+                <button class="btn btn-primary" style="margin-right: 35px;">Cancel</button>
+            </a>
+        </div>
+
+        <br>
+        <br>
+
+        <table cellpadding="18px" id="center2">
+
+            <tr>
+                <th>Date</th>
+                <th>Account</th>
+                <th>Biller ID</th>
+                <th>Amount</th>
+                <th>Categorey</th>
+                <th>Status</th>
+            </tr>
+
+            <tbody *ngFor="let s of data;">
+                {{s.data}}
+                <tr>
+                    <td>{{s.date}}</td>
+                    <td>{{s.acc}}</td>
+                    <td><a routerLink="/details">
+                            {{s.biller}}
+                        </a></td>
+                    <td>{{s.amount}}</td>
+                    <td>{{s.categorey}}</td>
+                    <td>{{s.status}}</td>
+                </tr>
+            </tbody>
+
+        </table>
+    </div>
+</form>
+

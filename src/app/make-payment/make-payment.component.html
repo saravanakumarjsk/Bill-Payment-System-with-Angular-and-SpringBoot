@@ -10,6 +10,8 @@
 <br>
 <br>
 
+<form #makePaymentForm="ngForm">
+
 <div>
 
 
@@ -19,25 +21,39 @@
         <tr>
             <td><label for=""><b>Acc No</b></label></td>
             <td>
-                <select class="form-select" aria-label="Default select example" name="account" ngModel>
+                <select class="form-select" class="form-select" #acc="ngModel" required name="cat"
+                [class.is-invalid]="acc.invalid && acc.touched" [(ngModel)]="makePayment.acc">
+                    <option value="" selected>select the prefered account</option>
                     <option *ngFor="let acc of account">{{acc}}</option>
                 </select>
+                <div *ngIf="acc.errors && (acc.valid || acc.touched)">
+                    <small class="text-danger" *ngIf="acc.errors.required">Please select the Account</small>
+                </div>
             </td>
         </tr>
 
         <tr>
             <td><label for=""><b>Biller</b></label></td>
             <td>
-                <select class="form-select" aria-label="Default select example" name="biller" ngModel>
+                <select class="form-select" class="form-select" #bill="ngModel" required name="bill"
+                [class.is-invalid]="acc.invalid && acc.touched" [(ngModel)]="makePayment.biller">
+                    <option value="" selected>select the biller</option>
                     <option *ngFor="let bill of biller">{{bill}}</option>
                 </select>
+                <div *ngIf="bill.errors && (bill.valid || bill.touched)">
+                    <small class="text-danger" *ngIf="bill.errors.required">Please select the Biller</small>
+                </div>
             </td>
         </tr>
 
         <tr>
-            <td><label for="exampleInputPassword1"><b>Bill Amount</b></label></td>
+            <td><label ><b>Bill Amount</b></label></td>
             <td>
-                <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Enter Amount">
+                <input type="text" class="form-control"  #billamt="ngModel" required name="billamt"
+                [class.is-invalid]="billamt.invalid && billamt.touched" [(ngModel)]="makePayment.bill">
+                <small class="text-danger" [class.d-none]="billamt.valid || billamt.untouched">
+                    Please enter the Bill Amount
+                </small>
             </td>
         </tr>
 
@@ -45,18 +61,34 @@
         <tr>
             <td><label for=""><b>Pay Now?</b></label></td>
             <td>
-                <input type="radio" id="male" name="gender" value="Yes">&nbsp;
-                <label for="male">Yes</label> &nbsp;
-                <input type="radio" id="female" name="gender" value="No">&nbsp;
-                <label for="female">No</label><br>
+                <input type="radio" value="yes" #pay="ngModel" required name="yes" class="form-check-input"
+                     [(ngModel)]="makePayment.pay">&nbsp;
+                    <label for="">Yes</label> &nbsp;
+                    <input type="radio" value="no" #pay="ngModel" required name="yes" class="form-check-input"
+                     [(ngModel)]="makePayment.pay">&nbsp;
+                    <label for="">No</label><br>
+                    <small class="text-danger" [class.d-none]="pay.touched">Please select the status</small>
             </td>
         </tr>
 
         <tr>
             <td><label for="e"><b>Payment Due Date</b></label></td>
-            <td>
-                <input placeholder="Select date" type="date" id="example" class="form-control">
-            </td>
+            
+            <div *ngIf="pay.value != 'yes';else elseblock1">
+                <td>
+                    <input type="date"  class="form-control" #date="ngModel" required name="date"
+                    [class.is-invalid]="date.invalid && date.touched" [(ngModel)]="makePayment.date">
+                </td>
+                <small class="text-danger" [class.d-none]="date.valid || date.untouched">
+                    Please enter the date
+                </small>
+            </div>
+            <ng-template #elseblock1>
+                <td>
+                    <input disabled  type="date"  class="form-control" #date="ngModel" required name="date"
+                    [class.is-invalid]="date.invalid && date.touched" [(ngModel)]="makePayment.date">
+                </td>
+            </ng-template>
         </tr>
     </table>
 
@@ -64,10 +96,14 @@
     <br>
     <div class="center1">
         <a routerLink="/manage">
-            <button class="btn btn-primary" style="margin-right: 35px;">Submit</button>
+            <button  [disabled]="makePaymentForm.form.invalid" class="btn btn-primary" style="margin-right: 35px;">Submit</button>
         </a>
 
         <a routerLink="/manage">
             <button class="btn btn-primary" style="margin-right: 35px;">Cancel</button>
         </a>
     </div>
+</div>
+</form>
+
+

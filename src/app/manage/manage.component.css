@@ -9,12 +9,12 @@ h1{
     right: 30px;
 }
 
-.center, tr ,td, th{
+.center, tr ,td, th, table{
     margin-left: auto; 
     margin-right: auto;
     border: 1px solid black;
     text-align: center;
-    text-shadow: 2px 2px 5px rgb(110, 120, 110);
+    text-shadow: 2px 2px 12px rgb(110, 120, 110);
     
 }
 

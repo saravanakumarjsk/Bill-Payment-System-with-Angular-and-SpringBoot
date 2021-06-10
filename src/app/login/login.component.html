@@ -1,31 +1,39 @@
 <br>
 <br>
-<div class="container-fuild" >
-    
+<div class="container-fuild">
+
     <h1>User Login</h1>
-    <form #loginForm="ngForm" >
-        
+    <form #loginForm="ngForm">
+
         <table cellpadding="18px" class="center">
             <tr>
-                <td><label for=""><b>User Name</b></label></td>
+                <td><label for=""><b>User Name:</b></label></td>
                 <td>
-                    <input type="text" class="form-control" name="userName" ngModel>
+                    <input type="text" #userName="ngModel" required class="form-control"
+                        [class.is-invalid]="userName.invalid && userName.touched" name="studentName"
+                        [(ngModel)]="login.userName">
+                    <small class="text-danger" [class.d-none]="userName.valid || userName.untouched">
+                        Please enter the User Name
+                    </small>
                 </td>
             </tr>
             <tr>
-                <td><label for=""><b>Password</b></label></td>
+                <td><label for=""><b>Password:</b></label></td>
                 <td>
-                    <input type="password" class="form-control" name="password" ngModel>
+                    <input type="password" #password="ngModel" required class="form-control"
+                        [class.is-invalid]="password.invalid && password.touched" name="password"
+                        [(ngModel)]="login.password">
+                    <small class="text-danger" [class.d-none]="password.valid || password.untouched">
+                        Please enter the Password
+                    </small>
                 </td>
             </tr>
             <tr>
                 <td></td>
                 <td>
-                    <!-- <button type="button" class="btn btn-primary">Login</button> -->
-                    <a routerLink="/register"><button class="btn btn-success" > Login </button></a>
+                    <a routerLink="/register"><button [disabled]="loginForm.form.invalid"  class="btn btn-success"> Login </button></a>
                 </td>
             </tr>
         </table>
     </form>
 </div>
-

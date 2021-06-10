@@ -9,76 +9,34 @@
 </h1>
 <br>
 <br>
+<form #registrationForm="ngForm">
+    <div>
+        <table cellpadding="20px" class="center">
+    
+        <tr>
+            <th>Select</th>
+            <th>Biller Name</th>
+            <th>Address</th>
+            <th>Categorey</th>
+            <th>Status</th>
+        </tr>
+    
+        <tr *ngFor="let item of biller">
+            <td>
+                <input type="radio" value={{item.id}} name="first" checked
+                #first="ngModel" required class="form-check-input" (click)="selected(item.id)"
+                 [(ngModel)]="billerManage.id">
+            </td>
+            <td>{{item.name}}</td>
+            <td>{{item.address}}</td>
+            <td>{{item.categorey}}</td>
+            <td>{{item.status}}</td>
+        </tr>
+    
+    </table>
+    </div>
+</form>
 
-<div>
-    <table cellpadding="20px" class="center">
-
-    <tr>
-        <th>Select</th>
-        <th>Biller Name</th>
-        <th>Address</th>
-        <th>Categorey</th>
-    </tr>
-
-    <tr>
-        <td>
-            <input type="radio">
-        </td>
-        <td>
-            Venkat
-        </td>
-        <td>
-            7th Avenue
-        </td>
-        <td>
-            Electricity
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <input type="radio">
-        </td>
-        <td>
-            Srijith
-        </td>
-        <td>
-            56th Avenue
-        </td>
-        <td>
-            Milk
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <input type="radio">
-        </td>
-        <td>
-            Sebin
-        </td>
-        <td>
-            20th Avenue
-        </td>
-        <td>
-            Water
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <input type="radio">
-        </td>
-        <td>
-            Shyam
-        </td>
-        <td>
-            Red Hills
-        </td>
-        <td>
-            School Fees
-        </td>
-    </tr>
-
-</table>
-</div>
 <br><br>
 <div class="center1">
     <a routerLink="/add">
@@ -86,12 +44,18 @@
     </a>
     
     
-    <a routerLink="/modify">
-        <button class="btn btn-primary"  style="margin-right: 35px;">Update</button>
-    </a>
+    <div *ngIf="isselected == false; else elseBlock">
+            <button [disabled]="registrationForm.form.invalid" class="btn btn-primary"  style="margin-right: 35px;">Update</button>
+    </div>
+    <ng-template #elseBlock>
+        <a routerLink="/modify">
+            <button  class="btn btn-primary"  style="margin-right: 35px;">Update</button>
+        </a>
+    </ng-template>
     
     
     <a routerLink="/activation">
         <button class="btn btn-primary"  style="margin-right: 35px;">Back</button>
     </a>
 </div>
+

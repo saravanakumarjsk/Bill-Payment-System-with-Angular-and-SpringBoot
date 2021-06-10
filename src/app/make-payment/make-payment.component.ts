@@ -14,5 +14,13 @@ export class MakePaymentComponent implements OnInit {
 
   public account:any = [87346823409, 2349283423];
   public biller:any = ["Saravana", "Sarath", "William", "Sathish"]
+  
+  public makePayment = {
+    "acc":"",
+    "biller":"",
+    "bill":"",
+    "pay":"",
+    "date":""
+  }
 
 }

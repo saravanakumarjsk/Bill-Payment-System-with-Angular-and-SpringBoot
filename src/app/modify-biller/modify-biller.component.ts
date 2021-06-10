@@ -12,6 +12,15 @@ export class ModifyBillerComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  public categorey:any = ["Insurence", "Food", "Water", "Electricity"];
+  public categorey: any = ["Insurence", "Food", "Water", "Electricity"];
+
+  public updateBiller = {
+    "name": "",
+    "address": "",
+    "city": "",
+    "pin": "",
+    "cat": "",
+    "status":""
+  }
 
 }
