@@ -1,8 +1,8 @@
 .container-fuild {
     margin: auto;
     width: 40%;
-    height: 50%;
-    padding: 20px;
+    height: 55%;
+    padding: 9px;
     margin-top: 10%;
     box-shadow:0px 0px 20px #000;
     color:rgb(141, 123, 17)
@@ -14,7 +14,7 @@
 }
 
 .tb1{
-    font-size: 21px;
+    /* font-size: 21px; */
 }
 
 

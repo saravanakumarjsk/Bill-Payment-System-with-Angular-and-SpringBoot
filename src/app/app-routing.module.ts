@@ -1,3 +1,4 @@
+import { TestComponent } from './test/test.component';
 import { PaymentDetailsComponent } from './payment-details/payment-details.component';
 import { ViewPaymentComponent } from './view-payment/view-payment.component';
 import { MakePaymentComponent } from './make-payment/make-payment.component';
@@ -21,6 +22,7 @@ const routes: Routes = [
   { path:'modify', component: ModifyBillerComponent},
   { path:'payment', component: MakePaymentComponent},
   { path:'view', component: ViewPaymentComponent},
+  { path:'test', component: TestComponent},
   { path:'details', component: PaymentDetailsComponent},
   {path :'',redirectTo:'login',pathMatch:'full'}
 ];

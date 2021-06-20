@@ -1,7 +1,5 @@
 <div class="logout">
-    <a routerLink="/login">
-        <button type="button" class="btn btn-danger">Log Out</button>
-    </a>
+    <button type="button" class="btn btn-danger" (click)="signOut()">Sign Out</button>
 </div>
 
 <h1>
@@ -12,50 +10,42 @@
 <form #registrationForm="ngForm">
     <div>
         <table cellpadding="20px" class="center">
-    
-        <tr>
-            <th>Select</th>
-            <th>Biller Name</th>
-            <th>Address</th>
-            <th>Categorey</th>
-            <th>Status</th>
-        </tr>
-    
-        <tr *ngFor="let item of biller">
-            <td>
-                <input type="radio" value={{item.id}} name="first" checked
-                #first="ngModel" required class="form-check-input" (click)="selected(item.id)"
-                 [(ngModel)]="billerManage.id">
-            </td>
-            <td>{{item.name}}</td>
-            <td>{{item.address}}</td>
-            <td>{{item.categorey}}</td>
-            <td>{{item.status}}</td>
-        </tr>
-    
-    </table>
-    </div>
-</form>
 
-<br><br>
-<div class="center1">
-    <a routerLink="/add">
+            <tr>
+                <th>Serial</th>
+                <th>Biller Name</th>
+                <th>Address</th>
+                <th>Categorey</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+
+            <tr *ngFor="let item of biller; index as i">
+                <td>{{i+1}}</td>
+                <td>{{item.billerName}}</td>
+                <td>{{item.billerAddress}}</td>
+                <td>{{item.billerCategorey}}</td>
+                <td>{{item.status}}</td>
+                <td>
+                    <button class="btn btn-primary" (click)="onModify(item.billerId)">Update</button>
+                </td>
+            </tr>
+
+        </table>
+    </div>
+
+
+    <br><br>
+    <div class="center1">
+        <a routerLink="/add">
         <button class="btn btn-primary" style="margin-right: 35px;">Add</button>
-    </a>
-    
-    
-    <div *ngIf="isselected == false; else elseBlock">
-            <button [disabled]="registrationForm.form.invalid" class="btn btn-primary"  style="margin-right: 35px;">Update</button>
-    </div>
-    <ng-template #elseBlock>
-        <a routerLink="/modify">
-            <button  class="btn btn-primary"  style="margin-right: 35px;">Update</button>
         </a>
-    </ng-template>
-    
-    
-    <a routerLink="/activation">
-        <button class="btn btn-primary"  style="margin-right: 35px;">Back</button>
-    </a>
-</div>
 
+
+
+        <a routerLink="/activation">
+            <button class="btn btn-primary" style="margin-right: 35px;">Back</button>
+        </a>
+    </div>
+
+</form>

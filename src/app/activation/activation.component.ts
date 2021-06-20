@@ -1,3 +1,5 @@
+import { Router } from '@angular/router';
+import { AuthService } from './../auth.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +9,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ActivationComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router, private auth:AuthService) { }
 
   ngOnInit(): void {
+    this.checkValidSession();
+  }
+
+ private checkValidSession() {
+    if(this.auth.getter() == false)
+    {
+      this.router.navigate(['login']);
+    }
+  }
+
+  public signOut(){
+    this.auth.setter(false);
+    this.router.navigate(['login']);
   }
 
 }

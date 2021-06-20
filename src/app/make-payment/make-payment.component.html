@@ -1,7 +1,5 @@
 <div class="logout">
-    <a routerLink="/login">
-        <button type="button" class="btn btn-danger">Log Out</button>
-    </a>
+    <button type="button" class="btn btn-danger" (click)="signOut()">Sign Out</button>
 </div>
 
 <h1>
@@ -11,99 +9,132 @@
 <br>
 
 <form #makePaymentForm="ngForm">
+    <!-- {{makePayment | json}} -->
 
-<div>
+    <div>
+        <table cellpadding="18px" class="center">
+
+            <tr>
+                <td><label for=""><b>Acc No</b></label></td>
+                <td>
+                    <select [(ngModel)]="selected" (ngModelChange)="selectedChanged()"  class="form-control box" class="form-select" #acc="ngModel" required name="acc"
+                        [class.is-invalid]="acc.invalid && acc.touched" [(ngModel)]="makePayment.account.acccountNumber">
+
+                        <option value="" selected>select the prefered account</option>
+                        <option *ngFor="let acc of pfaccounts">{{acc}}</option>
+                    </select>
+                    <div *ngIf="acc.errors && (acc.valid || acc.touched)">
+                        <small class="text-danger" *ngIf="acc.errors.required">Please select the Account</small>
+                    </div>
+                </td>
+                <td>
+                    Balance: {{balance}}
+                </td>
+            </tr>
+
+            <tr>
+                <td><label for=""><b>Biller</b></label></td>
+                <td>
+                    <select [(ngModel)]="billSelected" (ngModelChange)="getBillerId()"  class="form-control box" class="form-select" class="form-select" #bill="ngModel" required name="bill"
+                        [class.is-invalid]="bill.invalid && bill.touched">
+
+                        <option value="" >select the biller</option>
+                        <option *ngFor="let bill of billerArr">{{bill}}</option>
+                    </select>
+                    <div *ngIf="bill.errors && (bill.valid || bill.touched)">
+                        <small class="text-danger" *ngIf="bill.errors.required">Please select the Biller</small>
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <td><label><b>Bill Amount</b></label></td>
+                <td>
+                    <input type="text" pattern="[0-9]+" title="please enter number only" class="form-control" #billamt="ngModel" required name="billamt"
+                        [class.is-invalid]="billamt.invalid && billamt.touched" [(ngModel)]="makePayment.billAmount">
+                    <small class="text-danger" [class.d-none]="billamt.valid || billamt.untouched">
+                        Please enter a valid Bill Amount
+                    </small>
+                    <div *ngIf="makePayment.billAmount > balance">
+                        
+                        <small class="text-danger" [class.d-none]="billamt.valid || billamt.untouched">
+                            insufficient balance
+                    </small>
+                    <small class="text-danger">
+                        insufficient balance
+                    </small>
+                    </div>
+                </td>
+            </tr>
 
 
-    <table cellpadding="18px" class="center">
-
-
-        <tr>
-            <td><label for=""><b>Acc No</b></label></td>
-            <td>
-                <select class="form-select" class="form-select" #acc="ngModel" required name="cat"
-                [class.is-invalid]="acc.invalid && acc.touched" [(ngModel)]="makePayment.acc">
-                    <option value="" selected>select the prefered account</option>
-                    <option *ngFor="let acc of account">{{acc}}</option>
-                </select>
-                <div *ngIf="acc.errors && (acc.valid || acc.touched)">
-                    <small class="text-danger" *ngIf="acc.errors.required">Please select the Account</small>
-                </div>
-            </td>
-        </tr>
-
-        <tr>
-            <td><label for=""><b>Biller</b></label></td>
-            <td>
-                <select class="form-select" class="form-select" #bill="ngModel" required name="bill"
-                [class.is-invalid]="acc.invalid && acc.touched" [(ngModel)]="makePayment.biller">
-                    <option value="" selected>select the biller</option>
-                    <option *ngFor="let bill of biller">{{bill}}</option>
-                </select>
-                <div *ngIf="bill.errors && (bill.valid || bill.touched)">
-                    <small class="text-danger" *ngIf="bill.errors.required">Please select the Biller</small>
-                </div>
-            </td>
-        </tr>
-
-        <tr>
-            <td><label ><b>Bill Amount</b></label></td>
-            <td>
-                <input type="text" class="form-control"  #billamt="ngModel" required name="billamt"
-                [class.is-invalid]="billamt.invalid && billamt.touched" [(ngModel)]="makePayment.bill">
-                <small class="text-danger" [class.d-none]="billamt.valid || billamt.untouched">
-                    Please enter the Bill Amount
-                </small>
-            </td>
-        </tr>
-
-
-        <tr>
-            <td><label for=""><b>Pay Now?</b></label></td>
-            <td>
-                <input type="radio" value="yes" #pay="ngModel" required name="yes" class="form-check-input"
-                     [(ngModel)]="makePayment.pay">&nbsp;
+            <tr>
+                <td><label for=""><b>Pay Now?</b></label></td>
+                <td>
+                    <input type="radio" value="Received" #pay="ngModel" required name="yes" class="form-check-input"
+                        [(ngModel)]="makePayment.paymentStatus">&nbsp;
                     <label for="">Yes</label> &nbsp;
-                    <input type="radio" value="no" #pay="ngModel" required name="yes" class="form-check-input"
-                     [(ngModel)]="makePayment.pay">&nbsp;
+                    <input type="radio" value="Processed" #pay="ngModel" required name="yes" class="form-check-input"
+                        [(ngModel)]="makePayment.paymentStatus">&nbsp;
                     <label for="">No</label><br>
                     <small class="text-danger" [class.d-none]="pay.touched">Please select the status</small>
-            </td>
-        </tr>
-
-        <tr>
-            <td><label for="e"><b>Payment Due Date</b></label></td>
-            
-            <div *ngIf="pay.value != 'yes';else elseblock1">
-                <td>
-                    <input type="date"  class="form-control" #date="ngModel" required name="date"
-                    [class.is-invalid]="date.invalid && date.touched" [(ngModel)]="makePayment.date">
                 </td>
-                <small class="text-danger" [class.d-none]="date.valid || date.untouched">
-                    Please enter the date
+            </tr>
+
+            <tr>
+                <td><label for="e"><b>Payment Due Date</b></label></td>
+
+                <div>
+                    <div *ngIf="pay.value != 'Received'">
+                        <td>
+    
+                            <input type="date" [min]="todayDate" class="form-control" #date="ngModel" required name="date"
+                                [class.is-invalid]="date.invalid && date.touched" [(ngModel)]="makePayment.paymentDueDate">
+                        </td>
+                        <small class="text-danger" [class.d-none]="date.valid || date.untouched">
+                            Please enter the date
+                        </small>
+                        <!-- <div *ngIf="makePayment.paymentDueDate < date == true && makePayment.paymentDueDate != '' ">
+                            <small class="text-danger">
+                                Payment due date cannot be past date
+                            </small>
+                        </div> -->
+                    </div>
+                    <div *ngIf="pay.value == 'Received' ">
+                            <td>
+                                <input disabled type="date" class="form-control" #date="ngModel" required name="date"
+                                    [class.is-invalid]="date.invalid && date.touched" [(ngModel)]="makePayment.date">
+                            </td>
+                    </div>
+                </div>
+            </tr>
+        </table>
+
+
+        <br>
+        <div class="center1">
+            <div *ngIf="makePayment.paymentDueDate < date && makePayment.paymentDueDate !=''; else elseblock2">
+                <small class="text-danger">
+                    Payment due date cannot a be past date
                 </small>
+                <br>
+                    <button disabled class="btn btn-primary"
+                        style="margin-right: 35px;">Submit</button>
+                        <a routerLink="/manage">
+                            <button class="btn btn-primary" style="margin-right: 35px;">Cancel</button>
+                        </a>
             </div>
-            <ng-template #elseblock1>
-                <td>
-                    <input disabled  type="date"  class="form-control" #date="ngModel" required name="date"
-                    [class.is-invalid]="date.invalid && date.touched" [(ngModel)]="makePayment.date">
-                </td>
+            <ng-template #elseblock2>
+                <!-- <a routerLink="/manage"> -->
+                    <button [disabled]="makePaymentForm.form.invalid" class="btn btn-primary"
+                        style="margin-right: 35px;"  (click)="onSubmit()">Submit</button>
+                <!-- </a> -->
+                <a routerLink="/manage">
+                    <button class="btn btn-primary" style="margin-right: 35px;">Cancel</button>
+                </a>
             </ng-template>
-        </tr>
-    </table>
 
-
-    <br>
-    <div class="center1">
-        <a routerLink="/manage">
-            <button  [disabled]="makePaymentForm.form.invalid" class="btn btn-primary" style="margin-right: 35px;">Submit</button>
-        </a>
-
-        <a routerLink="/manage">
-            <button class="btn btn-primary" style="margin-right: 35px;">Cancel</button>
-        </a>
+            
+        </div>
     </div>
-</div>
 </form>
-
-

@@ -1,30 +1,32 @@
 <div class="logout">
-    <a routerLink="/login">
-        <button type="button" class="btn btn-danger">Log Out</button>
-    </a>
+        <button type="button" class="btn btn-danger" (click)="signOut()">Sign Out</button>
 </div>
-
 
 
 <div class="container-fuild">
     <h1>Bill Payment Registration</h1>
-    <form #registrationForm="ngForm">
+    <form #registrationForm="ngForm" (ngSubmit)="onSubmit()">
+        <!-- {{customer | json}} -->
+        <!-- {{registrationForm.form.valid}} -->
         <table cellpadding="18px" class="tb1">
+
             <tr>
                 <td><label for=""><b>Customer Name</b></label></td>
-                <td><label for=""><b style="color: rgb(174, 68, 226);">Saravana kumar</b></label></td>
+                <td><label for=""><b style="color: rgb(174, 68, 226);">{{userName}}</b></label></td>
             </tr>
             <tr>
                 <td><label for=""><b>Preffered Account 1</b></label></td>
                 <td>
-                    <select class="form-select" #account1="ngModel" required name="account1" [(ngModel)]="acc.account1"
-                        [class.is-invalid]="account1.invalid && account1.touched">
-                        <option value="" selected>select your perfered account1</option>
+                    <select class="form-select" #perferredAcc1="ngModel" required name="perferredAcc1"
+                        [(ngModel)]="customer.perferredAcc1"
+                        [class.is-invalid]="perferredAcc1.invalid && perferredAcc1.touched">
+                        <option value="" >select your perfered account1</option>
                         <option *ngFor="let acc of account">{{acc}}</option>
                     </select>
                     <br>
-                    <div *ngIf="account1.errors && (account1.valid || account1.touched)">
-                        <small class="text-danger" *ngIf="account1.errors.required">Please select your perfered account
+                    <div *ngIf="perferredAcc1.errors && (perferredAcc1.valid || perferredAcc1.touched)">
+                        <small class="text-danger" *ngIf="perferredAcc1.errors.required">Please select your perfered
+                            account
                             1</small>
                     </div>
                 </td>
@@ -33,18 +35,20 @@
                 <td><label for=""><b>Preffered Account 2</b></label></td>
                 <td>
 
-                    <select [disabled]="account.length == 1" class="form-select" #account2="ngModel" name="account2"
-                        [(ngModel)]="acc.account2" [class.is-invalid]="account2.invalid && account2.touched">
-                        <option value="" selected>select your perfered account2</option>
+                    <select [disabled]="account.length == 1" class="form-select" #perferredAcc2="ngModel" 
+                        name="perferredAcc2" [(ngModel)]="customer.perferredAcc2"
+                        [class.is-invalid]="perferredAcc2.invalid && perferredAcc2.touched">
+                        <option value="" >select your perfered account2</option>
                         <option *ngFor="let acc of account">{{acc}}</option>
                     </select>
                     <br>
-                    <div *ngIf="account2.value == account1.value && account2.value != ''; else elseblock">
+                    <div
+                        *ngIf="(perferredAcc1.value == perferredAcc2.value) && (perferredAcc2.value != ''); else elseblock ">
                         <small class="text-danger">perfered account2 cannot be the same as perfered account1</small>
                     </div>
                     <ng-template #elseblock>
-                        <div *ngIf="account2.errors && (account2.valid || account2.touched)">
-                            <small class="text-danger" *ngIf="account2.errors.required">Please select your perfered
+                        <div *ngIf="perferredAcc2.errors && (perferredAcc2.valid || perferredAcc2.touched)">
+                            <small class="text-danger" *ngIf="perferredAcc2.errors.required">Please select your perfered
                                 account 2</small>
                         </div>
                     </ng-template>
@@ -61,31 +65,40 @@
                 <b>
 
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox"
-                        name="check" #check="ngModel" required class="form-check-input" (click)="clicked"
+                        name="check" #check="ngModel" required class="form-check-input" (click)="clicked()"
                         [(ngModel)]="acc.check">
-                    <div *ngIf="check.value == false">
-                        <small class="text-danger">Agree to terms and conditions</small>
+                    <div *ngIf="check.value == false;else elseBlock1">
+                        <small class="text-danger">Check the box to Agree the Terms and Conditions</small>
                     </div>
-                    I hereby declare that I have read the terms and
-                    conditions completely as mentioned in
-                    the Bill Payment Agreement and I unconditionally agree to abide by these terms and conditions.
+                    <ng-template #elseBlock1>
+                        I hereby declare that I have read the terms and
+                        conditions completely as mentioned in
+                        the Bill Payment Agreement and I unconditionally agree to abide by these terms and conditions.
+                    </ng-template>
+                   
                 </b>
             </p>
         </div>
-        <table class="b1" cellpadding="32px" cellspacing="30px">
+        <table class="b1" cellpadding="32px">
             <tr>
                 <td></td>
                 <td> </td>
                 <td> </td>
                 <td>
-                    <a routerLink="/activation">
-                        <button [disabled]="registrationForm.form.invalid" class="btn btn-success">Submit</button>
-                    </a>
+                    <!-- {{perferredAcc1.value != perferredAcc2.value}} -->
+                    <div *ngIf="perferredAcc1.value != perferredAcc2.value">
+                        <!-- <a routerLink="/activation"> -->
+                            <button [disabled]="registrationForm.form.invalid" class="btn btn-success">Submit</button>
+                        <!-- </a> -->
+                    </div>
+                    <div *ngIf="perferredAcc1.value == perferredAcc2.value">
+                        <button disabled class="btn btn-success">Submit</button>
+                    </div>
+
                 </td>
                 <td>
-                    <a routerLink="/login">
-                        <button type="button" class="btn btn-danger">Cancel</button>
-                    </a>
+
+                    <button type="button" class="btn btn-danger">Cancel</button>
 
                 </td>
             </tr>
@@ -94,3 +107,4 @@
     </form>
 
 </div>
+

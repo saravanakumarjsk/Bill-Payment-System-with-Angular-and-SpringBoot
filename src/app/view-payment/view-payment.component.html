@@ -1,7 +1,5 @@
 <div class="logout">
-    <a routerLink="/login">
-        <button type="button" class="btn btn-danger">Log Out</button>
-    </a>
+    <button type="button" class="btn btn-danger" (click)="signOut()">Sign Out</button>
 </div>
 
 <h1>
@@ -11,17 +9,13 @@
 <br>
 
 <form #viewHistoryForm="ngForm">
-
-
-
     <div>
         <table cellpadding="18px" class="center">
             <tr>
                 <td><label for=""><b>Catogorey</b></label></td>
                 <td>
                     <select class="form-select" #cat="ngModel" required name="cat" required
-                        [(ngModel)]="viewPayment.cat" [class.is-invalid]="cat.invalid && cat.touched"
-                        [(ngModel)]="viewPayment.cat">
+                        [(ngModel)]="viewPayment.billerCategorey" [class.is-invalid]="cat.invalid && cat.touched">
                         <option value="" selected>select the categorey</option>
                         <option *ngFor="let cat of categorey">{{cat}}</option>
                     </select>
@@ -32,12 +26,12 @@
             </tr>
 
             <tr>
-                <td><label for=""><b>Biller</b></label></td>
+                <td><label for=""><b>Status</b></label></td>
                 <td>
                     <select class="form-select" class="form-select" #blr="ngModel" required name="blr"
-                        [class.is-invalid]="blr.invalid && blr.touched" [(ngModel)]="viewPayment.biller">
-                        <option value="" selected>select the biller</option>
-                        <option *ngFor="let bill of biller">{{bill}}</option>
+                        [class.is-invalid]="blr.invalid && blr.touched" [(ngModel)]="viewPayment.status">
+                        <option value="" selected>select the biller status</option>
+                        <option *ngFor="let bill of statusArr">{{bill}}</option>
                     </select>
                     <div *ngIf="blr.errors && (blr.valid || blr.touched)">
                         <small class="text-danger" *ngIf="blr.errors.required">Please select the Biller</small>
@@ -77,43 +71,144 @@
         <br>
         <div class="center1">
             <a routerLink="/history">
-                <button class="btn btn-primary" style="margin-right: 35px;">Search</button>
+                <!-- <button class="btn btn-primary" style="margin-right: 35px;">Search</button> -->
             </a>
 
-            <a routerLink="/manage">
-                <button class="btn btn-primary" style="margin-right: 35px;">Cancel</button>
+            <a routerLink="/activation">
+                <button class="btn btn-danger" style="margin-right: 35px;">Back To Menu</button>
             </a>
         </div>
 
         <br>
         <br>
 
-        <table cellpadding="18px" id="center2">
+        <table cellpadding="15px" id="center2">
 
             <tr>
+                <th>S.no</th>
                 <th>Date</th>
-                <th>Account</th>
-                <th>Biller ID</th>
+                <th>Account Number</th>
+                <th>Biller Name</th>
                 <th>Amount</th>
                 <th>Categorey</th>
                 <th>Status</th>
+                <th>Action</th>
             </tr>
 
-            <tbody *ngFor="let s of data;">
-                {{s.data}}
-                <tr>
-                    <td>{{s.date}}</td>
-                    <td>{{s.acc}}</td>
-                    <td><a routerLink="/details">
-                            {{s.biller}}
-                        </a></td>
-                    <td>{{s.amount}}</td>
-                    <td>{{s.categorey}}</td>
+            <tbody *ngFor="let s of table;index as i">
+                <tr *ngIf="viewPayment.status == '' && viewPayment.billerCategorey == '' && viewPayment.from == '' && viewPayment.to == '' ">
+                    <td>{{i+1}}</td>
+                    <td>{{s.paymentDate  | date:"dd/MM/yyyy"}}</td>
+                    <td>{{s.acccountNumber}}</td>
+                    <td>{{s.billerName}}</td>
+                    <td>{{s.billAmount}}</td>
+                    <td>{{s.billerCategorey}}</td>
                     <td>{{s.status}}</td>
+                    <td>
+                        <button class="btn btn-primary" style="margin-right: 35px;" (click)="onModify(s.bill_number)">Update</button>
+                    </td>
+                </tr>   
+
+                <tr *ngIf="viewPayment.billerCategorey == s.billerCategorey && viewPayment.status == '' && viewPayment.from <= s.paymentDate && viewPayment.to >= s.paymentDate">
+                    <td>{{i+1}}</td>
+                    <td>{{s.paymentDate  | date:"dd/MM/yyyy"}}</td>
+                    <td>{{s.acccountNumber}}</td>
+                    <td>{{s.billerName}}</td>
+                    <td>{{s.billAmount}}</td>
+                    <td>{{s.billerCategorey}}</td>
+                    <td>{{s.status}}</td>
+                    <td>
+                        <button class="btn btn-primary" style="margin-right: 35px;" (click)="onModify(s.bill_number)">Update</button>
+                    </td>
                 </tr>
+
+                <tr *ngIf="viewPayment.billerCategorey == s.billerCategorey && viewPayment.status == '' && viewPayment.from == '' && viewPayment.to == '' ">
+                    <td>{{i+1}}</td>
+                    <td>{{s.paymentDate  | date:"dd/MM/yyyy"}}</td>
+                    <td>{{s.acccountNumber}}</td>
+                    <td>{{s.billerName}}</td>
+                    <td>{{s.billAmount}}</td>
+                    <td>{{s.billerCategorey}}</td>
+                    <td>{{s.status}}</td>
+                    <td>
+                        <button class="btn btn-primary" style="margin-right: 35px;" (click)="onModify(s.bill_number)">Update</button>
+                    </td>
+                </tr>
+
+                <tr *ngIf="viewPayment.billerCategorey == ''  && viewPayment.status == s.status && viewPayment.from == '' && viewPayment.to == '' ">
+                    <td>{{i+1}}</td>
+                    <td>{{s.paymentDate  | date:"dd/MM/yyyy"}}</td>
+                    <td>{{s.acccountNumber}}</td>
+                    <td>{{s.billerName}}</td>
+                    <td>{{s.billAmount}}</td>
+                    <td>{{s.billerCategorey}}</td>
+                    <td>{{s.status}}</td>
+                    <td>
+                        <button class="btn btn-primary" style="margin-right: 35px;" (click)="onModify(s.bill_number)">Update</button>
+                    </td>
+                </tr>
+
+                <tr *ngIf="viewPayment.billerCategorey == ''  && viewPayment.status == s.status && viewPayment.from <= s.paymentDate && viewPayment.to >= s.paymentDate">
+                    <td>{{i+1}}</td>
+                    <td>{{s.paymentDate  | date:"dd/MM/yyyy"}}</td>
+                    <td>{{s.acccountNumber}}</td>
+                    <td>{{s.billerName}}</td>
+                    <td>{{s.billAmount}}</td>
+                    <td>{{s.billerCategorey}}</td>
+                    <td>{{s.status}}</td>
+                    <td>
+                        <button class="btn btn-primary" style="margin-right: 35px;" (click)="onModify(s.bill_number)">Update</button>
+                    </td>
+                </tr>
+
+                <tr *ngIf="viewPayment.billerCategorey == s.billerCategorey && viewPayment.status == s.status && viewPayment.from <= s.paymentDate && viewPayment.to >= s.paymentDate">
+                    <td>{{i+1}}</td>
+                    <td>{{s.paymentDate  | date:"dd/MM/yyyy"}}</td>
+                    <td>{{s.acccountNumber}}</td>
+                    <td>{{s.billerName}}</td>
+                    <td>{{s.billAmount}}</td>
+                    <td>{{s.billerCategorey}}</td>
+                    <td>{{s.status}}</td>
+                    <td>
+                        <button class="btn btn-primary" style="margin-right: 35px;" (click)="onModify(s.bill_number)">Update</button>
+                    </td>
+                </tr>
+
+
+
+                <tr *ngIf="viewPayment.from <= s.paymentDate && viewPayment.to >= s.paymentDate && viewPayment.billerCategorey == s.billerCategorey && viewPayment.status == s.status">
+                    <td>{{i+1}}</td>
+                    <td>{{s.paymentDate  | date:"dd/MM/yyyy"}}</td>
+                    <td>{{s.acccountNumber}}</td>
+                    <td>{{s.billerName}}</td>
+                    <td>{{s.billAmount}}</td>
+                    <td>{{s.billerCategorey}}</td>
+                    <td>{{s.status}}</td>
+                    <td>
+                        <button class="btn btn-primary" style="margin-right: 35px;" (click)="onModify(s.bill_number)">Update</button>
+                    </td>
+                </tr>
+
+                <tr *ngIf="viewPayment.from <= s.paymentDate && viewPayment.to >= s.paymentDate &&  viewPayment.billerCategorey == '' && viewPayment.status == '' ">
+                    <td>{{i+1}}</td>
+                    <td>{{s.paymentDate  | date:"dd/MM/yyyy"}}</td>
+                    <td>{{s.acccountNumber}}</td>
+                    <td>{{s.billerName}}</td>
+                    <td>{{s.billAmount}}</td>
+                    <td>{{s.billerCategorey}}</td>
+                    <td>{{s.status}}</td>
+                    <td>
+                        <button class="btn btn-primary" style="margin-right: 35px;" (click)="onModify(s.bill_number)">Update</button>
+                    </td>
+                </tr>
+
+                
             </tbody>
+            
 
         </table>
+        <br>
+            <br><br><br><br><br>
     </div>
 </form>
 

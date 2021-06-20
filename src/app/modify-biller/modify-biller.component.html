@@ -1,7 +1,5 @@
 <div class="logout">
-    <a routerLink="/login">
-        <button type="button" class="btn btn-danger">Log Out</button>
-    </a>
+    <button type="button" class="btn btn-danger" (click)="signOut()">Sign Out</button>
 </div>
 
 <h1>
@@ -11,6 +9,7 @@
 <br>
 
 <form #modifyForm="ngForm">
+    <!-- {{updateBiller | json}} -->
     <div>
         <table cellpadding="18px" class="center">
     
@@ -20,7 +19,7 @@
     
                 <td><input type="text" class="form-control" name="name" required #name="ngModel" required
                         class="form-control" [class.is-invalid]="name.invalid && name.touched"
-                        [(ngModel)]="updateBiller.name" placeholder="Enter Name">
+                        [(ngModel)]="updateBiller.billerName" placeholder="Enter Name">
                     <small class="text-danger" [class.d-none]="name.valid || name.untouched">
                         Please enter the Biller name
                     </small>
@@ -33,7 +32,7 @@
                 <td>
                     <textarea class="form-control" class="form-control" name="address" required #address="ngModel"
                         required class="form-control" [class.is-invalid]="address.invalid && address.touched"
-                        [(ngModel)]="updateBiller.address" placeholder="Enter Address" cols="30" rows="4"></textarea>
+                        [(ngModel)]="updateBiller.billerAddress" placeholder="Enter Address" cols="30" rows="4"></textarea>
                     <small class="text-danger" [class.d-none]="address.valid || address.untouched">
                         Please enter the Biller Address
                     </small>
@@ -58,7 +57,7 @@
                 <td>
                     <input type="text" class="form-control" type="text" class="form-control" name="pin" required
                         pattern="[0-9]{1,6}" #pin="ngModel" required class="form-control"
-                        [class.is-invalid]="pin.invalid && pin.touched" [(ngModel)]="updateBiller.pin"
+                        [class.is-invalid]="pin.invalid && pin.touched" [(ngModel)]="updateBiller.pincode"
                         placeholder="Enter pin code">
                     <div *ngIf="pin.errors && (pin.valid || pin.touched)">
                         <small class="text-danger" *ngIf="pin.errors.required">Please enter the pin code</small>
@@ -70,8 +69,8 @@
             <tr>
                 <td><label for=""><b>Categorey</b></label></td>
                 <td>
-                    <select class="form-select" #cat="ngModel" required name="cat" required [(ngModel)]="updateBiller.cat"
-                        [class.is-invalid]="cat.invalid && cat.touched" [(ngModel)]="updateBiller.cat">
+                    <select class="form-select" #cat="ngModel" required name="cat" required
+                        [class.is-invalid]="cat.invalid && cat.touched" [(ngModel)]="updateBiller.billerCategorey">
                         <option value="" selected>select the categorey</option>
                         <option *ngFor="let cat of categorey">{{cat}}</option>
                     </select>
@@ -102,7 +101,7 @@
         <br>
         <div class="center1">
             <a routerLink="/manage">
-                <button  [disabled]="modifyForm.form.invalid" class="btn btn-primary" style="margin-right: 35px;">Update</button>
+                <button  [disabled]="modifyForm.form.invalid" class="btn btn-primary" style="margin-right: 35px;" (click)="onSubmit()">Update</button>
             </a>
     
             <a routerLink="/manage">

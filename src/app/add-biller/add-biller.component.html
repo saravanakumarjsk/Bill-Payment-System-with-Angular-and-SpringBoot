@@ -1,7 +1,5 @@
 <div class="logout">
-    <a routerLink="/login">
-        <button type="button" class="btn btn-danger">Log Out</button>
-    </a>
+    <button type="button" class="btn btn-danger" (click)="signOut()">Sign Out</button>
 </div>
 
 <h1>
@@ -14,7 +12,10 @@
                         [class.is-invalid]="userName.invalid && userName.touched" name="studentName"
                         [(ngModel)]="login.userName"> -->
 
-<form #addForm="ngForm">
+<form #addBillerForm="ngForm" (ngSubmit)="onSubmit()">
+    <!-- {{addBiller | json}}
+    {{date}} -->
+    
     <div>
         <table cellpadding="20px" class="center">
 
@@ -22,10 +23,10 @@
             <tr>
                 <td><label for="exampleInputEmail1"><b>Biller Name</b></label></td>
 
-                <td><input type="text" class="form-control" name="name" required #name="ngModel" required
-                        class="form-control" [class.is-invalid]="name.invalid && name.touched"
-                        [(ngModel)]="addBiller.name" placeholder="Enter Name">
-                    <small class="text-danger" [class.d-none]="name.valid || name.untouched">
+                <td><input type="text" class="form-control" name="billerName" required #billerName="ngModel" required
+                        class="form-control" [class.is-invalid]="billerName.invalid && billerName.touched"
+                        [(ngModel)]="addBiller.billerName" placeholder="Enter Name">
+                    <small class="text-danger" [class.d-none]="billerName.valid || billerName.untouched">
                         Please enter the Biller name
                     </small>
                 </td>
@@ -37,7 +38,7 @@
                 <td>
                     <textarea class="form-control" class="form-control" name="address" required #address="ngModel"
                         required class="form-control" [class.is-invalid]="address.invalid && address.touched"
-                        [(ngModel)]="addBiller.address" placeholder="Enter Address" cols="30" rows="4"></textarea>
+                        [(ngModel)]="addBiller.billerAddress" placeholder="Enter Address" cols="30" rows="4"></textarea>
                     <small class="text-danger" [class.d-none]="address.valid || address.untouched">
                         Please enter the Biller Address
                     </small>
@@ -61,12 +62,12 @@
                 <td><label><b>PIN Code</b></label></td>
                 <td>
                     <input type="text" class="form-control" type="text" class="form-control" name="pin" required
-                        pattern="[0-9]{1,6}" #pin="ngModel" required class="form-control"
-                        [class.is-invalid]="pin.invalid && pin.touched" [(ngModel)]="addBiller.pin"
+                        pattern="[0-9]{6}" #pin="ngModel" required class="form-control"
+                        [class.is-invalid]="pin.invalid && pin.touched" [(ngModel)]="addBiller.pincode"
                         placeholder="Enter pin code">
                     <div *ngIf="pin.errors && (pin.valid || pin.touched)">
                         <small class="text-danger" *ngIf="pin.errors.required">Please enter the pin code</small>
-                        <small class="text-danger" *ngIf="pin.errors.pattern">your pin code is invalid</small>
+                        <small class="text-danger" *ngIf="pin.errors?.pattern">your pin code is invalid</small>
                     </div>
                 </td>
             </tr>
@@ -74,7 +75,7 @@
             <tr>
                 <td><label for=""><b>Categorey</b></label></td>
                 <td>
-                    <select class="form-select" #cat="ngModel" required name="cat" required [(ngModel)]="addBiller.cat"
+                    <select class="form-select" #cat="ngModel" required name="cat" required [(ngModel)]="addBiller.billerCategorey"
                         [class.is-invalid]="cat.invalid && cat.touched" ngModel>
                         <option value="" selected>select the categorey</option>
                         <option *ngFor="let cat of categorey">{{cat}}</option>
@@ -91,9 +92,9 @@
 
         <br>
         <div class="center1">
-            <a routerLink="/manage">
-                <button class="btn btn-primary" style="margin-right: 35px;">Submit</button>
-            </a>
+            <!-- <a routerLink="/manage"> -->
+                <button [disabled]="addBillerForm.form.invalid" class="btn btn-primary" style="margin-right: 35px;">Submit</button>
+            <!-- </a> -->
 
             <a routerLink="/activation">
                 <button class="btn btn-primary" style="margin-right: 35px;">Back</button>
@@ -101,3 +102,4 @@
         </div>
     </div>
 </form>
+

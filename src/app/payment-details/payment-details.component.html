@@ -1,8 +1,5 @@
 <div class="logout">
-    <a routerLink="/login">
-        <button type="button" class="btn btn-danger">Log Out</button>
-    </a>
-
+    <button type="button" class="btn btn-danger" (click)="signOut()">Sign Out</button>
 </div>
 
 <h1>
@@ -12,41 +9,53 @@
 <br>
 
 <form #detailsForm="ngForm">
+    <!-- {{details | json}} -->
 
-    <table cellpadding="18px" class="center">
+    <table cellpadding="23px" class="center">
         <tr>
             <td><b>Account Number</b></td>
-            <td><b>87462936423942</b></td>
+            <td>{{this.details.account.acccountNumber}}</td>
+            <td>balance: {{balance}}</td>
         </tr>
 
         <tr>
             <td><b>Biller</b></td>
-            <td><b>Ranjeev</b></td>
+            <td>{{details.billerName}}</td>
         </tr>
 
         <tr>
             <td><b>Bill Amount</b></td>
             <input type="text" class="form-control" #billamt="ngModel" required name="billamt"
-                [class.is-invalid]="billamt.invalid && billamt.touched" [(ngModel)]="details.bill">
+                [class.is-invalid]="billamt.invalid && billamt.touched" [(ngModel)]="details.billAmount">
             <small class="text-danger" [class.d-none]="billamt.valid || billamt.untouched">
                 Please enter the Bill Amount
             </small>
+            <div *ngIf="details.billAmount > balance">
+                <small class="text-danger">
+                    insufficient balance
+                </small>
+            </div>
         </tr>
 
         <tr>
             <td><b>Payment Status</b></td>
-            <td><b>Processed</b></td>
+            <td>{{details.paymentStatus}}</td>
         </tr>
 
         <tr>
             <td><label for="e"><b>Payment Date</b></label></td>
             <td>
                 <input type="date" id="date" class="form-control datepicker" #to="ngModel" required name="to"
-                    [class.is-invalid]="to.invalid && to.touched" [(ngModel)]="details.date">
+                    [class.is-invalid]="to.invalid && to.touched" [(ngModel)]="details.paymentDate">
 
                 <small class="text-danger" [class.d-none]="to.valid || to.untouched">
                     Please enter the payment date
                 </small>
+                <div *ngIf="details.paymentDate < date == true && details.paymentDate != '' ">
+                    <small class="text-danger">
+                        Payment date cannot be past date
+                    </small>
+                </div>
 
             </td>
         </tr>
@@ -54,15 +63,29 @@
     </table>
     <br>
     <div class="center1">
-        <a routerLink="/manage">
-            <button class="btn btn-primary" style="margin-right: 35px;">Save</button>
-        </a>
+        <!-- <a routerLink="/manage"> -->
+        <div *ngIf="details.paymentDate > date == true">
 
-        <a routerLink="/manage">
-            <button class="btn btn-primary" style="margin-right: 35px;">Delete</button>
-        </a>
+            <div *ngIf="details.paymentStatus == 'Received' ">
+                <button disabled class="btn btn-primary" style="margin-right: 35px;" (click)="onSave()">Save</button>
+            </div>
+            <div *ngIf="details.paymentStatus == 'Processed' ">
+                <button class="btn btn-primary" style="margin-right: 35px;" (click)="onSave()">Save</button>
+            </div>
+        </div>
+        <!-- </a> -->
 
-        <a routerLink="/manage">
+        <!-- <a routerLink="/manage"> -->
+        <div *ngIf="details.paymentStatus == 'Processed' ">
+            <button disabled class="btn btn-primary" style="margin-right: 35px;" (click)="onDelete()">Delete</button>
+        </div>
+        <div *ngIf="details.paymentStatus == 'Received' ">
+            <button class="btn btn-primary" style="margin-right: 35px;" (click)="onDelete()">Delete</button>
+        </div>
+
+        <!-- </a> -->
+
+        <a routerLink="/view">
             <button class="btn btn-primary" style="margin-right: 35px;">Cancel</button>
         </a>
     </div>

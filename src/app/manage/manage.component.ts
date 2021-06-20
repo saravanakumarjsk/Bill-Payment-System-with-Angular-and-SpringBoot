@@ -1,3 +1,6 @@
+import { AuthService } from './../auth.service';
+import { Router } from '@angular/router';
+import { AbcbankService } from './../abcbank.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,37 +10,57 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ManageComponent implements OnInit {
 
-  constructor() { }
+  constructor(private customerObj3: AbcbankService, private router: Router, private auth:AuthService) { }
+
+  public customer_id: any;
+  public biller: any = [];
 
   ngOnInit(): void {
-    this.getBiller();
+    this.checkValidSession();
+    this.fetchAllBillersByCustomerId();
   }
 
-  public biller:any;
+  private checkValidSession() {
+    if(this.auth.getter() == false)
+    {
+      this.router.navigate(['login']);
+    }
+  }
 
-  public getBiller() {
-    this.biller = [
-      {"id":1, "name":"saravana", "address":"7th thavenue", "categorey":"Electricity", "status":"Active"},
-      {"id":2, "name":"Venkat", "address":"56th Avenue", "categorey":"Milk", "status":"InActive"},
-      {"id":3, "name":"Srijith", "address":"20th Avenue", "categorey":"Water", "status":"Active"},
-      {"id":4, "name":"Sebin", "address":"Red Hills	", "categorey":"Electricity", "status":"InActive"},
-      {"id":5, "name":"Shyam", "address":"Avadi", "categorey":"School Fees", "status":"Active"},
-    ]
+  public signOut(){
+    this.auth.setter(false);
+    this.router.navigate(['login']);
+  }
+
+
+
+  public fetchAllBillersByCustomerId() {
+    this.customer_id = localStorage.getItem("local_id");
+    console.log("id 1 = " + this.customer_id);
+    this.customerObj3.getAllBillersByCustId(this.customer_id).subscribe(result => this.biller = result);
+    console.log(this.biller);
   }
 
   public isselected = false;
 
-  public selected(id:any) {
+  public selected(id: any) {
     this.isselected = true;
     console.log(id);
   }
 
   public billerManage = {
-    "id":"",
-    "name":"",
-    "address":"",
-    "categorey":"",
-    "status":""
+    "billerId": "",
+    "billerName": "",
+    "billerAddress": "",
+    "billerCategorey": "",
+    "status": ""
+  }
+
+  public onModify(id: number) {
+    console.log("biller id:"+id);
+    localStorage.removeItem("local_bid");
+    localStorage.setItem("local_bid", id.toString());
+    this.router.navigate(['modify']);
   }
 
 }

@@ -16,7 +16,9 @@ import { MakePaymentComponent } from './make-payment/make-payment.component';
 import { ViewPaymentComponent } from './view-payment/view-payment.component';
 import { PaymentDetailsComponent } from './payment-details/payment-details.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import { HttpClientModule} from '@angular/common/http';
+import { DatePipe } from '@angular/common';
+import { TestComponent } from './test/test.component';
 
 @NgModule({
   declarations: [
@@ -32,14 +34,17 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MakePaymentComponent,
     ViewPaymentComponent,
     PaymentDetailsComponent,
+    TestComponent,
+    
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     BrowserAnimationsModule,
+    HttpClientModule,
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,8 +1,8 @@
-.header {
-    padding: 10px;
+.header, h1 {
+    padding: 5px;
     text-align: center;
-    background: #6bc7b5;
+    background: #616156;
     color: white;
-    font-size: 30px;
+    font-size: 34px;
   }
   

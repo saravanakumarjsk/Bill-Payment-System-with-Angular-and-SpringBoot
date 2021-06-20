@@ -3,17 +3,19 @@
 <div class="container-fuild">
 
     <h1>User Login</h1>
-    <form #loginForm="ngForm">
+    <form #loginForm="ngForm" (ngSubmit)="onSubmit()">
+
+        <!-- {{login | json}} -->
 
         <table cellpadding="18px" class="center">
             <tr>
                 <td><label for=""><b>User Name:</b></label></td>
                 <td>
                     <input type="text" #userName="ngModel" required class="form-control"
-                        [class.is-invalid]="userName.invalid && userName.touched" name="studentName"
+                        [class.is-invalid]="userName.invalid && userName.touched" name="userName"
                         [(ngModel)]="login.userName">
                     <small class="text-danger" [class.d-none]="userName.valid || userName.untouched">
-                        Please enter the User Name
+                        Please enter the correct User Name
                     </small>
                 </td>
             </tr>
@@ -24,14 +26,16 @@
                         [class.is-invalid]="password.invalid && password.touched" name="password"
                         [(ngModel)]="login.password">
                     <small class="text-danger" [class.d-none]="password.valid || password.untouched">
-                        Please enter the Password
+                        Please enter the correct Password
                     </small>
                 </td>
             </tr>
             <tr>
                 <td></td>
                 <td>
-                    <a routerLink="/register"><button [disabled]="loginForm.form.invalid"  class="btn btn-success"> Login </button></a>
+                    <!-- <a routerLink="/register"> -->
+                        <button [disabled]="loginForm.form.invalid" class="btn btn-success"> Login</button>
+                    <!-- </a> -->
                 </td>
             </tr>
         </table>
