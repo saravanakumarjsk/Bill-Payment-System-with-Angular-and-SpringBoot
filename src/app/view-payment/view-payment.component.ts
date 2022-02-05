@@ -11,15 +11,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ViewPaymentComponent implements OnInit {
 
-  constructor(private customerObj4: AbcbankService, private router: Router, private datepipe: DatePipe, private auth:AuthService) { }
+  constructor(private customerObj4: AbcbankService, private router: Router, private datepipe: DatePipe, private auth: AuthService) { }
 
-  public customer_id:any;
+  public customer_id: any;
 
-  public table:any = [];
+  public table: any = [];
   public date: any;
   date3: Date = new Date();
 
-  
+
 
   ngOnInit(): void {
     this.checkValidSession();
@@ -32,13 +32,12 @@ export class ViewPaymentComponent implements OnInit {
   }
 
   private checkValidSession() {
-    if(this.auth.getter() == false)
-    {
+    if (this.auth.getter() == false) {
       this.router.navigate(['login']);
     }
   }
 
-  public signOut(){
+  public signOut() {
     this.auth.setter(false);
     this.router.navigate(['login']);
   }
@@ -52,24 +51,24 @@ export class ViewPaymentComponent implements OnInit {
     this.customerObj4.getPmtCategoreyByCustId(this.customer_id).subscribe(result => this.categorey = result);
   }
 
-  fetchTableByCustomerId(){
+  fetchTableByCustomerId() {
     this.customerObj4.getHistoryTableByCustId(this.customer_id).subscribe(result => this.table = result);
   }
 
   public viewPayment = {
-    "bill_number":"",
-    "billerCategorey":"",
-    "billerId":"",
-    "status":"",
-    "paymentDate":"",
-    "acccountNumber":"",
-    "billerName":"",
-    "billAmount":"",
-    "from":"",
-    "to":""
+    "bill_number": "",
+    "billerCategorey": "",
+    "billerId": "",
+    "status": "",
+    "paymentDate": "",
+    "acccountNumber": "",
+    "billerName": "",
+    "billAmount": "",
+    "from": "",
+    "to": ""
   }
 
-  public onModify(id: number){
+  public onModify(id: number) {
     this.router.navigate(['details']);
     localStorage.removeItem("local_payid");
     localStorage.setItem("local_payid", id.toString());
